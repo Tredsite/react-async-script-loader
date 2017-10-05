@@ -107,14 +107,18 @@ const scriptLoader = (...scripts) => (WrappedComponent) => {
       this._isMounted = false;
     }
 
+    getWrappedInstance () {
+      return this.instance;
+    }
+
     render () {
       const props = {
         ...this.props,
         ...this.state
-      }
+      };
 
       return (
-        <WrappedComponent {...props} />
+        <WrappedComponent {...props} ref={(node) => this.instance = node} />
       )
     }
   }
